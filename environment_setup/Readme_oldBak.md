@@ -1,11 +1,9 @@
 # DevOps For AI
-##### Updated by: Laura Edell, Sr Data Scientist 
-##### Last Updated: 1/10/2019
 
-This workshop will help you to understand how to build the CICD pipeline for Data Science work. We will be using the VSTS Team Project build and release tool for it. 
+This tutorial will help you to understand how to build the Continuous Integration and Continuous Delivery pipeline for Data Science work. We will be using the VSTS Team Project build and release tool for it. 
 
 ## Prerequisite
-- Request Azure ML Python SDK
+- Request Azure ML Python SDK Git Access (Email Me) 
 - Request to get [Azure Subscription Whitelisted](https://github.com/Azure/AzureMLPreview/#prerequisites) for Azure ML Python SDK(not needed once AML SDK is GA)
 - VSTS Team Project
 
