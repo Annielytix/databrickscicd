@@ -12,7 +12,7 @@ ws = Workspace.from_config()
 
 
 # Attach Experiment
-experiment_name = 'devops-ai'
+experiment_name = 'devops-ai-demo'
 exp = Experiment(workspace  = ws, name = experiment_name)
 print(exp.name, exp.workspace.name, sep = '\n')
 
@@ -20,12 +20,17 @@ run_config = RunConfiguration()
 run_config.target = 'mydsvm'
 
 # replace with your path to the python interpreter in the remote VM found earlier
-run_config.environment.python.interpreter_path = '/anaconda/envs/myenv/bin/python'
+run_config.environment.python.interpreter_path = '/anaconda/envs/py36/bin/python'
 run_config.environment.python.user_managed_dependencies = True
 
 
 src = ScriptRunConfig(source_directory = './code', script = 'training/train.py', run_config = run_config)
-run = exp.submit(src)
+try:
+    run = exp.submit(src)
+except Exception as e:
+    print(type(e))
+    print("Caught = {}".format(e.message))
+    raise e
 
 
 # Shows output of the run on stdout.
@@ -36,4 +41,4 @@ run_id = {}
 run_id['run_id'] = run.id
 run_id['experiment_name'] = run.experiment.name
 with open('aml_config/run_id.json', 'w') as outfile:
-  json.dump(run_id,outfile)
+    json.dump(run_id,outfile)

@@ -15,7 +15,7 @@ try:
     with open("aml_config/aks_webservice.json") as f:
         config = json.load(f)
 except:
-    print('No new model, thus no deployment on ACI')
+    print('No new model, thus no deployment on AKS')
     #raise Exception('No new model to register as production model perform better')
     sys.exit(0)
 
@@ -40,5 +40,5 @@ except Exception as e:
     print(result)
     raise Exception('AKS service is not working as expected')
 
-# Delete aci after test
-service.delete()
+# Delete AKS after test
+# service.delete()
