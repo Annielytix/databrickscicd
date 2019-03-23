@@ -11,7 +11,7 @@ from azureml.core import ScriptRunConfig
 ws = Workspace.from_config()
 
 # Attach Experiment
-experiment_name = 'devops-ai'
+experiment_name = 'devops-ai-demo'
 exp = Experiment(workspace  = ws, name = experiment_name)
 print(exp.name, exp.workspace.name, sep = '\n')
 
@@ -20,14 +20,14 @@ run_config_system_managed = RunConfiguration()
 # Use a new conda environment that is to be created from the conda_dependencies.yml file
 run_config_system_managed.environment.python.user_managed_dependencies = False
 # Automatically create the conda environment before the run
-run_config_system_managed.prepare_environment = True
+run_config_system_managed.auto_prepare_environment = True
 
 # # add scikit-learn to the conda_dependencies.yml file
 # Specify conda dependencies with scikit-learn
-# run_config_system_managed.environment.python.conda_dependencies = CondaDependencies.create(conda_packages=['scikit-learn'])
+run_config_system_managed.environment.python.conda_dependencies = CondaDependencies.create(conda_packages=['scikit-learn','json'])
 
 print("Submitting an experiment to new conda virtual env")
-src = ScriptRunConfig(source_directory = './code', script = 'training/train.py', run_config = run_config_user_managed)
+src = ScriptRunConfig(source_directory = './code', script = 'training/train.py', run_config = run_config_system_managed)
 run = exp.submit(src)
 
 # Shows output of the run on stdout.

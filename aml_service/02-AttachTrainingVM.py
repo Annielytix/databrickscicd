@@ -31,18 +31,19 @@ try:
     dsvm_compute.wait_for_completion(show_output =True)
 
 except Exception as e:
+    print(type(e))
     print("Caught = {}".format(e.message))
     print("Compute config already attached.")
 
 
 # Create VM if not available
-# compute_target_name = 'mydsvm'
+compute_target_name = 'mydsvm'
 
-# try:
-#     dsvm_compute = DsvmCompute(workspace=ws, name=compute_target_name)
-#     print('found existing:', dsvm_compute.name)
-# except ComputeTargetException:
-#     print('creating new.')
-#     dsvm_config = DsvmCompute.provisioning_configuration(vm_size="Standard_D2_v2")
-#     dsvm_compute = DsvmCompute.create(ws, name=compute_target_name, provisioning_configuration=dsvm_config)
-#     dsvm_compute.wait_for_completion(show_output=True)
+try:
+    dsvm_compute = DsvmCompute(workspace=ws, name=compute_target_name)
+    print('found existing:', dsvm_compute.name)
+except ComputeTargetException:
+    print('creating new.')
+    dsvm_config = DsvmCompute.provisioning_configuration(vm_size="Standard_D2_v2")
+    dsvm_compute = DsvmCompute.create(ws, name=compute_target_name, provisioning_configuration=dsvm_config)
+    dsvm_compute.wait_for_completion(show_output=True)
